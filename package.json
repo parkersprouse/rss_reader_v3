@@ -1,0 +1,71 @@
+{
+  "name": "rss-reader-v3",
+  "private": true,
+  "version": "0.0.1",
+  "license": "GPLv3",
+  "browserslist": "since 2018, > 0.3%, not dead",
+  "type": "module",
+  "homepage": "https://rss.parkersprouse.me",
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "engines": {
+    "node": "^20",
+    "pnpm": "^9"
+  },
+  "scripts": {
+    "preinstall": "node ./bin/ensure_pnpm.js",
+    "postinstall": "nuxt prepare",
+    "start": "pnpm run dev",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "check": "pnpm --silent dlx nuxi typecheck",
+    "lint:analyze": "pnpx @eslint/config-inspector",
+    "lint:full": "pnpm run lint:css && pnpm run lint:js",
+    "lint:fix": "pnpm run lint:css:fix && pnpm run lint:js:fix",
+    "lint:css": "stylelint --quiet-deprecation-warnings -f github \"styles/**/*.css\"",
+    "lint:css:fix": "stylelint -f verbose --fix \"styles/**/*.css\"",
+    "lint": "eslint .",
+    "lint:js:fix": "eslint . --fix",
+    "clean": "rimraf -I -g node_modules",
+    "clean:hard": "rimraf -I -g pnpm-lock.yaml && pnpm run clean"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "0.10.3",
+    "@nuxt/icon": "1.10.3",
+    "@nuxtjs/color-mode": "3.5.2",
+    "@pinia/nuxt": "0.9.0",
+    "@vueuse/nuxt": "12.2.0",
+    "nuxt": "^3.15.0",
+    "nuxt-security": "2.1.5",
+    "pinia": "^2.3.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
+    "@nuxt/eslint": "0.7.4",
+    "@types/node": "^22.10.2",
+    "eslint": "^9.0.0",
+    "eslint-import-resolver-custom-alias": "^1.3.2",
+    "eslint-plugin-n": "^17.15.1",
+    "globals": "^15.14.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
+    "vue-tsc": "^2.2.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "eslint": "9",
+        "vue-tsc": "2.2.0"
+      }
+    },
+    "updateConfig": {
+      "ignoreDependencies": [
+        "@types/node"
+      ]
+    }
+  }
+}
