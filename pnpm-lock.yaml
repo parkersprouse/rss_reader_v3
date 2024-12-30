@@ -42,6 +42,9 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0(vue@3.5.13(typescript@5.7.2))
     devDependencies:
+      '@csstools/stylelint-formatter-github':
+        specifier: ^1.0.0
+        version: 1.0.0(stylelint@16.12.0(typescript@5.7.2))
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.4.1
         version: 4.4.1(eslint@9.17.0(jiti@2.4.2))
@@ -301,6 +304,12 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       postcss-selector-parser: ^7.0.0
+
+  '@csstools/stylelint-formatter-github@1.0.0':
+    resolution: {integrity: sha512-YBKb4lNRXEpqrO6oJY0ql+D7lQGZcIwj/bs2bf3t95CU3NZFLrrZoJrKxVeyp5mCPo5iNopsp+wkksrjI7FI/Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      stylelint: ^16.6.0
 
   '@dual-bundle/import-meta-resolve@4.1.0':
     resolution: {integrity: sha512-+nxncfwHM5SgAtrVzgpzJOI1ol0PkumhVo469KCf9lUi21IGcY90G98VuHm9VRrUypmAzawAHO9bs6hqeADaVg==}
@@ -5260,6 +5269,10 @@ snapshots:
   '@csstools/selector-specificity@5.0.0(postcss-selector-parser@7.0.0)':
     dependencies:
       postcss-selector-parser: 7.0.0
+
+  '@csstools/stylelint-formatter-github@1.0.0(stylelint@16.12.0(typescript@5.7.2))':
+    dependencies:
+      stylelint: 16.12.0(typescript@5.7.2)
 
   '@dual-bundle/import-meta-resolve@4.1.0': {}
 

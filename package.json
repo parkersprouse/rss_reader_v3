@@ -22,9 +22,9 @@
     "check": "pnpm --silent dlx nuxi typecheck",
     "lint": "pnpm run lint:css && pnpm run lint:js",
     "lint:fix": "pnpm run lint:css:fix && pnpm run lint:js:fix",
-    "lint:css": "stylelint --quiet-deprecation-warnings -f verbose **/*.{css,vue}",
-    "lint:css:fix": "stylelint -f verbose --fix **/*.{css,vue}",
-    "lint:css:ci": "stylelint --quiet-deprecation-warnings -f github **/*.{css,vue}",
+    "lint:css": "stylelint --quiet-deprecation-warnings -f verbose \"**/*.{css,vue}\"",
+    "lint:css:fix": "stylelint -f verbose --fix \"**/*.{css,vue}\"",
+    "lint:css:ci": "stylelint --custom-formatter \"@csstools/stylelint-formatter-github\" \"**/*.{css,vue}\"",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
     "lint:js:analyze": "pnpm --silent dlx @eslint/config-inspector",
@@ -45,6 +45,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@csstools/stylelint-formatter-github": "^1.0.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@nuxt/eslint": "0.7.4",
     "@stylistic/stylelint-plugin": "^3.1.1",
