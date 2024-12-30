@@ -22,317 +22,58 @@ const client_files = [
   'pages',
 ].flatMap((dir) => exts.map((ext) => `${dir}/**/*${ext}`));
 
-export default withNuxt([
-  /**
-   * ------------------------------------------------------------------------------
-   * Additional ESLint configuration
-   * https://eslint.org/docs/latest/use/configure/configuration-files
-   */
-  {
-    name: 'Global file list',
-    files: [
-      ...server_files,
-      ...client_files,
-    ],
-  },
-  {
-    name: 'Global ESLint configuration',
-    languageOptions: {
-      globals: {
-        ...globals.builtin,
-        ...globals.browser,
-        ...globals.node,
-      },
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    settings: {
-      'import-x/resolver': {
-        'eslint-import-resolver-custom-alias': {
-          alias: {
-            // Import alias to the root directory of the project
-            '@': import.meta.dirname,
-          },
-          extensions: exts,
-        },
-      },
-    },
-  },
-
-  /**
-   * ==============================================================================
-   * Extensions that have different sets of rules for different file groups
-   * need to be defined in here instead of in `overrides` calls because the
-   * `overrides` calls would be merged together, joining them back as one ruleset.
-   * ==============================================================================
-   */
-
-  /**
-   * ------------------------------------------------------------------------------
-   * Import rule customization
-   * https://github.com/un-ts/eslint-plugin-import-x#rules
-   */
-  {
-    name: 'Import rule customization',
-    rules: {
-      'import/consistent-type-specifier-style': [
-        'error',
-        'prefer-top-level',
-      ],
-      'import/default': 'error',
-      'import/export': 'error',
-      'import/extensions': [
-        'error',
-        'ignorePackages',
-        {
-          '': 'never',
-        },
-      ],
-      'import/first': 'error',
-      'import/named': 'error',
-      'import/namespace': 'error',
-      'import/newline-after-import': [
-        'error',
-        {
-          considerComments: true,
-          count: 1,
-        },
-      ],
-      'import/no-absolute-path': 'error',
-      'import/no-amd': 'error',
-      'import/no-anonymous-default-export': [
-        'error',
-        {
-          allowAnonymousClass: false,
-          allowAnonymousFunction: false,
-          allowArray: true,
-          allowArrowFunction: false,
-          allowLiteral: true,
-          allowObject: true,
-        },
-      ],
-      'import/no-commonjs': 'error',
-      'import/no-deprecated': 'error',
-      'import/no-duplicates': 'error',
-      'import/no-dynamic-require': 'error',
-      'import/no-extraneous-dependencies': 'off',
-      'import/no-mutable-exports': 'error',
-      'import/no-named-as-default': 'error',
-      'import/no-named-as-default-member': 'error',
-      'import/no-namespace': 'error',
-      'import/no-unresolved': 'error',
-      'import/no-webpack-loader-syntax': 'error',
-      'import/order': [
-        'error',
-        {
-          alphabetize: {
-            caseInsensitive: true,
-            order: 'asc',
-            orderImportKind: 'asc',
-          },
-          distinctGroup: true,
-          groups: [
-            // Do not change this order!
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'unknown',
-            'index',
-            'object',
-            'type',
-          ],
-          'newlines-between': 'always',
-          pathGroups: [
-            {
-              group: 'builtin',
-              pattern: '**/*.{css,json,svg,svg?raw}',
-              patternOptions: { dot: true, nocomment: true },
-              position: 'before',
-            },
-          ],
-          warnOnUnassignedImports: true,
-        },
-      ],
-    },
-  },
-
-  /**
-   * ------------------------------------------------------------------------------
-   * Unicorn rule customization
-   * https://github.com/sindresorhus/eslint-plugin-unicorn#rules
-   */
-  {
-    name: 'Unicorn rule customization',
-    rules: {
-      'unicorn/custom-error-definition': 'error',
-      'unicorn/empty-brace-spaces': 'error',
-      'unicorn/error-message': 'error',
-      'unicorn/explicit-length-check': [
-        'error',
-        {
-          'non-zero': 'greater-than',
-        },
-      ],
-      'unicorn/no-array-callback-reference': 'error',
-      'unicorn/no-array-for-each': 'error',
-      'unicorn/no-array-push-push': 'error',
-      'unicorn/no-await-in-promise-methods': 'error',
-      'unicorn/no-empty-file': 'error',
-      'unicorn/no-for-loop': 'error',
-      'unicorn/no-hex-escape': 'error',
-      'unicorn/no-instanceof-array': 'error',
-      // 'unicorn/no-length-as-slice-end': 'error', // Not released yet
-      'unicorn/no-lonely-if': 'error',
-      'unicorn/no-negation-in-equality-check': 'error',
-      'unicorn/no-new-array': 'error',
-      'unicorn/no-process-exit': 'error',
-      'unicorn/no-unnecessary-await': 'error',
-      'unicorn/no-unreadable-array-destructuring': 'error',
-      'unicorn/no-unreadable-iife': 'error',
-      'unicorn/no-useless-length-check': 'error',
-      'unicorn/no-useless-spread': 'error',
-      'unicorn/no-useless-switch-case': 'error',
-      'unicorn/no-useless-undefined': 'error',
-      'unicorn/number-literal-case': 'error',
-      'unicorn/numeric-separators-style': [
-        'warn',
-        {
-          binary: {
-            groupLength: 4,
-            minimumDigits: 0,
-          },
-          hexadecimal: {
-            groupLength: 2,
-            minimumDigits: 0,
-          },
-          number: {
-            groupLength: 3,
-            minimumDigits: 6,
-          },
-          octal: {
-            groupLength: 4,
-            minimumDigits: 0,
-          },
-          onlyIfContainsSeparator: false,
-        },
-      ],
-      'unicorn/prefer-array-find': 'error',
-      'unicorn/prefer-array-flat': 'error',
-      'unicorn/prefer-array-flat-map': 'error',
-      'unicorn/prefer-array-index-of': 'error',
-      'unicorn/prefer-array-some': 'error',
-      'unicorn/prefer-at': 'error',
-      'unicorn/prefer-blob-reading-methods': 'error',
-      'unicorn/prefer-date-now': 'error',
-      'unicorn/prefer-default-parameters': 'error',
-      'unicorn/prefer-includes': 'error',
-      'unicorn/prefer-logical-operator-over-ternary': 'error',
-      'unicorn/prefer-math-trunc': 'error',
-      'unicorn/prefer-modern-math-apis': 'error',
-      'unicorn/prefer-module': 'error',
-      'unicorn/prefer-native-coercion-functions': 'error',
-      'unicorn/prefer-negative-index': 'error',
-      'unicorn/prefer-node-protocol': 'error',
-      'unicorn/prefer-number-properties': [
-        'error',
-        {
-          checkInfinity: true,
-          checkNaN: true,
-        },
-      ],
-      'unicorn/prefer-object-from-entries': 'error',
-      'unicorn/prefer-optional-catch-binding': 'error',
-      'unicorn/prefer-regexp-test': 'error',
-      'unicorn/prefer-set-size': 'error',
-      'unicorn/prefer-spread': 'error',
-      'unicorn/prefer-string-raw': 'error',
-      'unicorn/prefer-string-replace-all': 'off',
-      'unicorn/prefer-string-starts-ends-with': 'error',
-      'unicorn/prefer-string-trim-start-end': 'error',
-      'unicorn/prefer-structured-clone': 'error',
-      'unicorn/prefer-switch': [
-        'error',
-        {
-          emptyDefaultCase: 'do-nothing-comment',
-          minimumCases: 3,
-        },
-      ],
-      'unicorn/prefer-type-error': 'error',
-      'unicorn/relative-url-style': [
-        'error',
-        'always', // always require the `./` prefix for explicitness
-      ],
-      'unicorn/require-array-join-separator': 'error',
-      'unicorn/require-number-to-fixed-digits-argument': 'error',
-      'unicorn/template-indent': 'error',
-      'unicorn/text-encoding-identifier-case': 'error',
-      'unicorn/throw-new-error': 'error',
-    },
-  },
-
-  /**
-   * ------------------------------------------------------------------------------
-   * Server-specific rule customization
-   * ------------------------------------------------------------------------------
-   */
-  {
-    name: 'Server-specific rule customization',
-    files: server_files,
-    rules: {
-      /**
-       * ------------------------------------------------------------------------------
-       * Node.js standards rule customization
-       * https://github.com/eslint-community/eslint-plugin-n#-rules
-       * (All Node-based rules should only apply to the server files)
-       */
-      'n/callback-return': ['error', ['callback', 'cb']],
-      'n/handle-callback-err': ['error', '^.*(e|E)rr'],
-      'n/no-callback-literal': 'error',
-      'n/no-extraneous-import': 'off',
-      'n/no-missing-import': 'off',
-      'n/no-path-concat': 'error',
-      'n/no-process-exit': 'off',
-      'n/prefer-global/console': ['error', 'always'],
-      'n/prefer-global/process': ['error', 'always'],
-      'n/prefer-node-protocol': 'error',
-
-      'unicorn/no-process-exit': 'off', // We want our non-browser scripts to be able to exit at-will
-    },
-  },
-
-  /**
-   * ------------------------------------------------------------------------------
-   * Client-specific rule customization
-   * ------------------------------------------------------------------------------
-   */
-  {
-    name: 'Client-specific rule customization',
-    files: client_files,
-    rules: {
-      'import/no-nodejs-modules': 'error',
-      'unicorn/no-document-cookie': 'error',
-      'unicorn/no-invalid-fetch-options': 'error',
-      'unicorn/no-invalid-remove-event-listener': 'error',
-      'unicorn/prefer-add-event-listener': 'error',
-      'unicorn/prefer-dom-node-text-content': 'error',
-      'unicorn/prefer-keyboard-event-key': 'error',
-    },
-  },
-])
+/* eslint-disable sort-keys -- the keys in here have a logical order that isn't always alphabetical */
+export default withNuxt()
   .prepend(
     comments.recommended,
     n.configs['flat/recommended'],
   )
+  .insertBefore('@eslint-community/eslint-comments/recommended', [
+    /**
+     * ------------------------------------------------------------------------------
+     * Additional ESLint configuration
+     * https://eslint.org/docs/latest/use/configure/configuration-files
+     */
+    {
+      name: 'global/files',
+      files: [
+        ...server_files,
+        ...client_files,
+      ],
+    },
+    {
+      name: 'global/configuration',
+      languageOptions: {
+        globals: {
+          ...globals.builtin,
+          ...globals.browser,
+          ...globals.node,
+        },
+        parserOptions: {
+          projectService: true,
+          tsconfigRootDir: import.meta.dirname,
+        },
+      },
+      settings: {
+        'import-x/resolver': {
+          'eslint-import-resolver-custom-alias': {
+            alias: {
+              // Import alias to the root directory of the project
+              '@': import.meta.dirname,
+            },
+            extensions: exts,
+          },
+        },
+      },
+    },
+  ])
   .override('nuxt/javascript', {
     /**
      * ------------------------------------------------------------------------------
      * Base ESLint rule customization
      * https://eslint.org/docs/latest/rules/
      */
+    name: 'nuxt/javascript | customized',
     rules: {
       'arrow-body-style': [
         'error',
@@ -474,6 +215,7 @@ export default withNuxt([
      * TypeScript rule customization
      * https://typescript-eslint.io/rules
      */
+    name: 'nuxt/typescript/rules | customized',
     rules: {
       '@typescript-eslint/consistent-type-imports': [
         'error',
@@ -600,6 +342,7 @@ export default withNuxt([
      * ESLint Stylistic rule customization
      * https://eslint.style/rules
      */
+    name: 'nuxt/stylistic | customized',
     rules: {
       '@stylistic/array-bracket-spacing': [
         'error',
@@ -778,6 +521,7 @@ export default withNuxt([
      * Directive comments rule customization
      * https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/
      */
+    name: '@eslint-community/eslint-comments/recommended | customized',
     rules: {
       '@eslint-community/eslint-comments/no-aggregating-enable': 'error',
       '@eslint-community/eslint-comments/no-unused-disable': 'error',
@@ -789,12 +533,216 @@ export default withNuxt([
       ],
     },
   })
+  .override('nuxt/import/rules', {
+    /**
+     * ------------------------------------------------------------------------------
+     * Import rule customization
+     * https://github.com/un-ts/eslint-plugin-import-x#rules
+     */
+    name: 'nuxt/import/rules | customized',
+    rules: {
+      'import/consistent-type-specifier-style': [
+        'error',
+        'prefer-top-level',
+      ],
+      'import/default': 'error',
+      'import/export': 'error',
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          '': 'never',
+        },
+      ],
+      'import/first': 'error',
+      'import/named': 'error',
+      'import/namespace': 'error',
+      'import/newline-after-import': [
+        'error',
+        {
+          considerComments: true,
+          count: 1,
+        },
+      ],
+      'import/no-absolute-path': 'error',
+      'import/no-amd': 'error',
+      'import/no-anonymous-default-export': [
+        'error',
+        {
+          allowAnonymousClass: false,
+          allowAnonymousFunction: false,
+          allowArray: true,
+          allowArrowFunction: false,
+          allowLiteral: true,
+          allowObject: true,
+        },
+      ],
+      'import/no-commonjs': 'error',
+      'import/no-deprecated': 'error',
+      'import/no-duplicates': 'error',
+      'import/no-dynamic-require': 'error',
+      'import/no-extraneous-dependencies': 'off',
+      'import/no-mutable-exports': 'error',
+      'import/no-named-as-default': 'error',
+      'import/no-named-as-default-member': 'error',
+      'import/no-namespace': 'error',
+      'import/no-unresolved': 'error',
+      'import/no-webpack-loader-syntax': 'error',
+      'import/order': [
+        'error',
+        {
+          alphabetize: {
+            caseInsensitive: true,
+            order: 'asc',
+            orderImportKind: 'asc',
+          },
+          distinctGroup: true,
+          groups: [
+            // Do not change this order!
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'unknown',
+            'index',
+            'object',
+            'type',
+          ],
+          'newlines-between': 'always',
+          pathGroups: [
+            {
+              group: 'builtin',
+              pattern: '**/*.{css,json,svg,svg?raw}',
+              patternOptions: { dot: true, nocomment: true },
+              position: 'before',
+            },
+          ],
+          warnOnUnassignedImports: true,
+        },
+      ],
+    },
+  })
+  .override('nuxt/tooling/unicorn', {
+    /**
+     * ------------------------------------------------------------------------------
+     * Unicorn rule customization
+     * https://github.com/sindresorhus/eslint-plugin-unicorn#rules
+     */
+    name: 'nuxt/tooling/unicorn | customized',
+    rules: {
+      'unicorn/custom-error-definition': 'error',
+      'unicorn/empty-brace-spaces': 'error',
+      'unicorn/error-message': 'error',
+      'unicorn/explicit-length-check': [
+        'error',
+        {
+          'non-zero': 'greater-than',
+        },
+      ],
+      'unicorn/no-array-callback-reference': 'error',
+      'unicorn/no-array-for-each': 'error',
+      'unicorn/no-array-push-push': 'error',
+      'unicorn/no-await-in-promise-methods': 'error',
+      'unicorn/no-empty-file': 'error',
+      'unicorn/no-for-loop': 'error',
+      'unicorn/no-hex-escape': 'error',
+      'unicorn/no-instanceof-array': 'error',
+      'unicorn/no-length-as-slice-end': 'error',
+      'unicorn/no-lonely-if': 'error',
+      'unicorn/no-negation-in-equality-check': 'error',
+      'unicorn/no-new-array': 'error',
+      'unicorn/no-process-exit': 'error',
+      'unicorn/no-unnecessary-await': 'error',
+      'unicorn/no-unreadable-array-destructuring': 'error',
+      'unicorn/no-unreadable-iife': 'error',
+      'unicorn/no-useless-length-check': 'error',
+      'unicorn/no-useless-spread': 'error',
+      'unicorn/no-useless-switch-case': 'error',
+      'unicorn/no-useless-undefined': 'error',
+      'unicorn/number-literal-case': 'error',
+      'unicorn/numeric-separators-style': [
+        'warn',
+        {
+          binary: {
+            groupLength: 4,
+            minimumDigits: 0,
+          },
+          hexadecimal: {
+            groupLength: 2,
+            minimumDigits: 0,
+          },
+          number: {
+            groupLength: 3,
+            minimumDigits: 6,
+          },
+          octal: {
+            groupLength: 4,
+            minimumDigits: 0,
+          },
+          onlyIfContainsSeparator: false,
+        },
+      ],
+      'unicorn/prefer-array-find': 'error',
+      'unicorn/prefer-array-flat': 'error',
+      'unicorn/prefer-array-flat-map': 'error',
+      'unicorn/prefer-array-index-of': 'error',
+      'unicorn/prefer-array-some': 'error',
+      'unicorn/prefer-at': 'error',
+      'unicorn/prefer-blob-reading-methods': 'error',
+      'unicorn/prefer-date-now': 'error',
+      'unicorn/prefer-default-parameters': 'error',
+      'unicorn/prefer-includes': 'error',
+      'unicorn/prefer-logical-operator-over-ternary': 'error',
+      'unicorn/prefer-math-trunc': 'error',
+      'unicorn/prefer-modern-math-apis': 'error',
+      'unicorn/prefer-module': 'error',
+      'unicorn/prefer-native-coercion-functions': 'error',
+      'unicorn/prefer-negative-index': 'error',
+      'unicorn/prefer-node-protocol': 'error',
+      'unicorn/prefer-number-properties': [
+        'error',
+        {
+          checkInfinity: true,
+          checkNaN: true,
+        },
+      ],
+      'unicorn/prefer-object-from-entries': 'error',
+      'unicorn/prefer-optional-catch-binding': 'error',
+      'unicorn/prefer-regexp-test': 'error',
+      'unicorn/prefer-set-size': 'error',
+      'unicorn/prefer-spread': 'error',
+      'unicorn/prefer-string-raw': 'error',
+      'unicorn/prefer-string-replace-all': 'off',
+      'unicorn/prefer-string-starts-ends-with': 'error',
+      'unicorn/prefer-string-trim-start-end': 'error',
+      'unicorn/prefer-structured-clone': 'error',
+      'unicorn/prefer-switch': [
+        'error',
+        {
+          emptyDefaultCase: 'do-nothing-comment',
+          minimumCases: 3,
+        },
+      ],
+      'unicorn/prefer-type-error': 'error',
+      'unicorn/relative-url-style': [
+        'error',
+        'always', // always require the `./` prefix for explicitness
+      ],
+      'unicorn/require-array-join-separator': 'error',
+      'unicorn/require-number-to-fixed-digits-argument': 'error',
+      'unicorn/template-indent': 'error',
+      'unicorn/text-encoding-identifier-case': 'error',
+      'unicorn/throw-new-error': 'error',
+    },
+  })
   .override('nuxt/vue/rules', {
     /**
      * ------------------------------------------------------------------------------
      * Vue.js rule customization
      * https://eslint.vuejs.org/rules/
      */
+    name: 'nuxt/vue/rules | customized',
     rules: {
       'vue/block-order': ['error', {
         order: ['template', 'script', 'style'],
@@ -808,7 +756,7 @@ export default withNuxt([
         {
           html: {
             component: 'always',
-            normal: 'always',
+            normal: 'any',
             void: 'never',
           },
           math: 'always',
@@ -819,4 +767,52 @@ export default withNuxt([
       'vue/require-default-prop': 'error',
       'vue/v-on-event-hyphenation': ['error', 'never'],
     },
+  })
+  .insertAfter('nuxt/import-globals', {
+    /**
+     * ------------------------------------------------------------------------------
+     * Server-specific rule customization
+     * ------------------------------------------------------------------------------
+     */
+    name: 'server/rules',
+    files: server_files,
+    rules: {
+      /**
+       * ------------------------------------------------------------------------------
+       * Node.js standards rule customization
+       * https://github.com/eslint-community/eslint-plugin-n#-rules
+       * (All Node-based rules should only apply to the server files)
+       */
+      'n/callback-return': ['error', ['callback', 'cb']],
+      'n/handle-callback-err': ['error', '^.*(e|E)rr'],
+      'n/no-callback-literal': 'error',
+      'n/no-extraneous-import': 'off',
+      'n/no-missing-import': 'off',
+      'n/no-path-concat': 'error',
+      'n/no-process-exit': 'off',
+      'n/prefer-global/console': ['error', 'always'],
+      'n/prefer-global/process': ['error', 'always'],
+      'n/prefer-node-protocol': 'error',
+
+      'unicorn/no-process-exit': 'off', // We want our non-browser scripts to be able to exit at-will
+    },
+  })
+  .insertAfter('server/rules', {
+    /**
+     * ------------------------------------------------------------------------------
+     * Client-specific rule customization
+     * ------------------------------------------------------------------------------
+     */
+    name: 'client/rules',
+    files: client_files,
+    rules: {
+      'import/no-nodejs-modules': 'error',
+      'unicorn/no-document-cookie': 'error',
+      'unicorn/no-invalid-fetch-options': 'error',
+      'unicorn/no-invalid-remove-event-listener': 'error',
+      'unicorn/prefer-add-event-listener': 'error',
+      'unicorn/prefer-dom-node-text-content': 'error',
+      'unicorn/prefer-keyboard-event-key': 'error',
+    },
   });
+/* eslint-enable sort-keys */
