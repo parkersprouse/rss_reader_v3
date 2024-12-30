@@ -1,3 +1,6 @@
+/* stylelint-disable property-no-vendor-prefix, value-no-vendor-prefix, selector-no-vendor-prefix, declaration-property-value-no-unknown */
+
+
 /* ======================================================================================= *
  * Merged and tweaked version of `sanitize.css` <https://github.com/csstools/sanitize.css> *
  * ======================================================================================= */
@@ -36,13 +39,15 @@
  */
 :where(:root) {
   cursor: default; /* 1 */
+
   line-height: 1.5; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 6 */
+  text-size-adjust: 100%; /* 6 */
   overflow-wrap: break-word; /* 3 */
   -moz-tab-size: 4; /* 4 */
   tab-size: 4; /* 4 */
+
   -webkit-tap-highlight-color: transparent; /* 5 */
-  -webkit-text-size-adjust: 100%; /* 6 */
-  text-size-adjust: 100%; /* 6 */
 }
 
 
@@ -61,8 +66,8 @@
  * `article` contexts in Chrome, Edge, Firefox, and Safari.
  */
 :where(h1) {
-  font-size: 2em;
   margin: 0.67em 0;
+  font-size: 2em;
 }
 
 
@@ -81,16 +86,16 @@
  * 2. Add the correct box sizing in Firefox.
  */
 :where(hr) {
-  color: inherit; /* 1 */
   height: 0; /* 2 */
+  color: inherit; /* 1 */
 }
 
 /**
  * Remove the list style on navigation lists in all browsers (opinionated).
  */
 :where(nav) :where(ol, ul) {
-  list-style-type: none;
   padding: 0;
+  list-style-type: none;
 }
 
 /**
@@ -107,9 +112,12 @@
  * 3. Prevent overflow of the container in all browsers (opinionated).
  */
 :where(pre) {
+  overflow: auto; /* 3 */
+  overscroll-behavior: auto; /* 3 */
+
+  /* stylelint-disable-next-line font-family-no-duplicate-names */
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
-  overflow: auto; /* 3 */
 }
 
 
@@ -136,6 +144,7 @@
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 :where(code, kbd, samp) {
+  /* stylelint-disable-next-line font-family-no-duplicate-names */
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
@@ -183,8 +192,8 @@
  */
 :where(table) {
   border-collapse: collapse; /* 1 */
-  border-color: currentColor; /* 2 */
   text-indent: 0; /* 3 */
+  border-color: currentColor; /* 2 */
 }
 
 
@@ -224,8 +233,8 @@
  * 3. Change the resize direction in all browsers (opinionated).
  */
 :where(textarea) {
-  margin: 0; /* 1 */
   resize: vertical; /* 3 */
+  margin: 0; /* 1 */
 }
 
 /**
@@ -233,23 +242,26 @@
  * 2. Add typography inheritance in all browsers (opinionated).
  */
 :where(button, input, select, textarea) {
+  padding: 0.25em 0.375em; /* 1 */
+
+  font: inherit; /* 2 */
+  color: inherit; /* 1 */
+  letter-spacing: inherit; /* 2 */
+
   background-color: transparent; /* 1 */
   border: 1px solid WindowFrame; /* 1 */
-  color: inherit; /* 1 */
-  font: inherit; /* 2 */
-  letter-spacing: inherit; /* 2 */
-  padding: 0.25em 0.375em; /* 1 */
 }
 
 /**
  * Change the inconsistent appearance in all browsers (opinionated).
  */
 :where(select) {
+  padding-right: 1em;
+
   -webkit-appearance: none;
   appearance: none;
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4'%3E%3Cpath d='M4 0h6L7 4'/%3E%3C/svg%3E") no-repeat right center / 1em;
   border-radius: 0;
-  padding-right: 1em;
 }
 
 /**
@@ -263,8 +275,8 @@
  * Remove the border and padding in all browsers (opinionated).
  */
 :where([type='color' i], [type='range' i]) {
-  border-width: 0;
   padding: 0;
+  border-width: 0;
 }
 
 /**
@@ -304,8 +316,8 @@
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
+  -webkit-appearance: button; /* 1 */
 }
 
 
@@ -316,18 +328,21 @@
  * Add the correct styles in Safari.
  */
 :where(dialog) {
-  background-color: white;
-  border: solid;
-  color: black;
-  height: -moz-fit-content;
-  height: fit-content;
-  left: 0;
-  margin: auto;
-  padding: 1em;
   position: absolute;
   right: 0;
+  left: 0;
+
   width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 1em;
+
+  color: black;
+
+  background-color: white;
+  border: solid;
 }
 
 :where(dialog:not([open])) {
@@ -369,8 +384,8 @@
 }
 
 :where([aria-hidden='false' i][hidden]:not(:focus)) {
-  clip: rect(0, 0, 0, 0);
   position: absolute;
+  clip: rect(0, 0, 0, 0);
 }
 
 
@@ -381,8 +396,8 @@
  * Restrict sizing to the page width in all browsers (opinionated).
  */
 :where(iframe, img, input, video, select, textarea) {
-  height: auto;
   max-width: 100%;
+  height: auto;
 }
 
 
@@ -445,12 +460,14 @@ pre {
   *,
   ::before,
   ::after {
-    animation-delay: -1ms !important; /* 1 */
-    animation-duration: 1ms !important; /* 1 */
-    animation-iteration-count: 1 !important; /* 1 */
-    background-attachment: initial !important; /* 2 */
     scroll-behavior: auto !important; /* 3 */
+
+    background-attachment: initial !important; /* 2 */
+
     transition-delay: 0s !important; /* 4 */
     transition-duration: 0s !important; /* 4 */
+    animation-duration: 1ms !important; /* 1 */
+    animation-delay: -1ms !important; /* 1 */
+    animation-iteration-count: 1 !important; /* 1 */
   }
 }

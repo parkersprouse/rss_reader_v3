@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
+    '@nuxtjs/stylelint-module',
     '@pinia/nuxt',
     '@vueuse/nuxt',
     'nuxt-security',
