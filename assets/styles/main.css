@@ -1,2 +1,40 @@
+/* stylelint-disable function-no-unknown, declaration-property-value-no-unknown */
 @import url('./_reset.css');
 @import url('./_lib.css');
+
+:root {
+  /* stylelint-disable -- Unsure where, but there's a bug in Stylelint that removes comments between
+                          values when running `--fix`, but it doesn't seem to be associated with a
+                          specific rule, so we just have to disable Stylelint for the whole attribute.
+                          @see https://github.com/stylelint/stylelint/issues/4620 (it isn't `indentation`) */
+  font-family:
+    'Inter Variable', /* ----- Primary font ----------- */
+    system-ui, /* ---- default system fonts ----------- */
+    -apple-system, /* -------- Safari on macOS >= 10.11 */
+    BlinkMacSystemFont, /* --- Chrome on macOS >= 10.11 */
+    'Segoe UI', /* ----------- >= Windows Vista ------- */
+    'Noto Sans', /* ---------- >= KDE Plasma 5 -------- */
+    'Helvetica',
+    'Arial',
+    sans-serif, /* ----------- fallback --------------- */
+    'Apple Color Emoji', /* -- macOS emoji ------------ */
+    'Segoe UI Emoji'; /* ----- Windows emoji ---------- */
+  /* stylelint-enable */
+}
+
+a {
+  @apply decoration-none hover:decoration-underline;
+  color: theme('colors.violet.500');
+}
+
+.icon-link {
+  @apply inline-flex flex-row flex-nowrap flex-justify-start flex-items-center gap-1;
+
+  & > .icon {
+    flex: 0 0 auto;
+  }
+
+  & > :not(.icon) {
+    flex: 1 0 auto;
+  }
+}

@@ -13,12 +13,14 @@ node_modules
 logs
 *.log
 
-# Misc
-.DS_Store
-.fleet
-.idea
-
 # Local env files
 .env
 .env.*
 !.env.example
+
+# Misc
+.DS_Store
+.fleet
+.idea
+*.bak
+.stylelint*

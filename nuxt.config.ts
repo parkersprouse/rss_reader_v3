@@ -9,12 +9,14 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/stylelint-module',
     '@pinia/nuxt',
+    '@unocss/nuxt',
     '@vueuse/nuxt',
     'nuxt-security',
   ],
   devtools: {
     enabled: true,
   },
+  css: ['~/assets/styles/main.css'],
   compatibilityDate: '2024-11-01',
   typescript: {
     builder: 'vite',
@@ -30,6 +32,11 @@ export default defineNuxtConfig({
         regexp: true,
         unicorn: true,
       },
+    },
+  },
+  icon: {
+    serverBundle: {
+      collections: ['ph'],
     },
   },
 });
