@@ -1,4 +1,6 @@
 // @ts-check
+import path from 'node:path';
+
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import n from 'eslint-plugin-n';
 import globals from 'globals';
@@ -10,10 +12,15 @@ const ts_exts = Object.freeze(['.cts', '.ts', '.mts']);
 const vue_exts = Object.freeze(['.vue']);
 const exts = [...js_exts, ...ts_exts, ...vue_exts];
 
+const __dirname = import.meta.dirname;
+
 const server_files = [
-  'bin',
-  'server',
-].flatMap((dir) => exts.map((ext) => `${dir}/**/*${ext}`));
+  '*.config.*',
+  ...[
+    'bin',
+    'server',
+  ].flatMap((dir) => exts.map((ext) => `${dir}/**/*${ext}`)),
+];
 
 const client_files = [
   'components',
@@ -35,6 +42,12 @@ export default withNuxt()
      * https://eslint.org/docs/latest/use/configure/configuration-files
      */
     {
+      ignores: [
+        'node_modules/**/*',
+        'TEMPLATE.vue',
+      ],
+    },
+    {
       name: 'global/files',
       files: [
         ...server_files,
@@ -51,7 +64,7 @@ export default withNuxt()
         },
         parserOptions: {
           projectService: true,
-          tsconfigRootDir: import.meta.dirname,
+          tsconfigRootDir: __dirname,
         },
       },
       settings: {
@@ -59,7 +72,7 @@ export default withNuxt()
           'eslint-import-resolver-custom-alias': {
             alias: {
               // Import alias to the root directory of the project
-              '@': import.meta.dirname,
+              '@': path.join(__dirname, '.'),
             },
             extensions: exts,
           },
@@ -786,7 +799,12 @@ export default withNuxt()
       'n/callback-return': ['error', ['callback', 'cb']],
       'n/handle-callback-err': ['error', '^.*(e|E)rr'],
       'n/no-callback-literal': 'error',
-      'n/no-extraneous-import': 'off',
+      'n/no-extraneous-import': [
+        'error',
+        {
+          allowModules: ['tailwindcss'],
+        },
+      ],
       'n/no-missing-import': 'off',
       'n/no-path-concat': 'error',
       'n/no-process-exit': 'off',
@@ -807,6 +825,16 @@ export default withNuxt()
     files: client_files,
     rules: {
       'import/no-nodejs-modules': 'error',
+      'n/callback-return': 'off',
+      'n/handle-callback-err': 'off',
+      'n/no-callback-literal': 'off',
+      'n/no-extraneous-import': 'off',
+      'n/no-missing-import': 'off',
+      'n/no-path-concat': 'off',
+      'n/no-process-exit': 'off',
+      'n/prefer-global/console': 'off',
+      'n/prefer-global/process': 'off',
+      'n/prefer-node-protocol': 'off',
       'unicorn/no-document-cookie': 'error',
       'unicorn/no-invalid-fetch-options': 'error',
       'unicorn/no-invalid-remove-event-listener': 'error',

@@ -4,14 +4,8 @@
       Home Page
     </h3>
 
-    <router-link
-      :to='{ name: "login" }'
-      class='icon-link'
-    >
-      <Icon
-        name='ph:sign-in-light'
-        class='pr-1'
-      />
+    <router-link :to='{ name: "login" }'>
+      <Icon name='ph:sign-in-light' />
       Login
     </router-link>
   </section>

@@ -1,0 +1,29 @@
+/*
+:root {
+  --surface-50: var(--surface-light-50);
+  --surface-100: var(--surface-light-100);
+  --surface-200: var(--surface-light-200);
+  --surface-300: var(--surface-light-300);
+  --surface-400: var(--surface-light-400);
+  --surface-500: var(--surface-light-500);
+  --surface-600: var(--surface-light-600);
+  --surface-700: var(--surface-light-700);
+  --surface-800: var(--surface-light-800);
+  --surface-900: var(--surface-light-900);
+  --surface-950: var(--surface-light-950);
+}
+
+.dark {
+  --surface-50: var(--surface-dark-50);
+  --surface-100: var(--surface-dark-100);
+  --surface-200: var(--surface-dark-200);
+  --surface-300: var(--surface-dark-300);
+  --surface-400: var(--surface-dark-400);
+  --surface-500: var(--surface-dark-500);
+  --surface-600: var(--surface-dark-600);
+  --surface-700: var(--surface-dark-700);
+  --surface-800: var(--surface-dark-800);
+  --surface-900: var(--surface-dark-900);
+  --surface-950: var(--surface-dark-950);
+}
+*/

@@ -4,12 +4,9 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/icon',
-    '@nuxtjs/color-mode',
+    '@nuxt/ui',
     '@nuxtjs/stylelint-module',
     '@pinia/nuxt',
-    '@unocss/nuxt',
     '@vueuse/nuxt',
     'nuxt-security',
   ],
@@ -38,6 +35,9 @@ export default defineNuxtConfig({
     serverBundle: {
       collections: ['ph'],
     },
+  },
+  tailwindcss: {
+    editorSupport: true,
   },
 });
 /* eslint-enable sort-keys */

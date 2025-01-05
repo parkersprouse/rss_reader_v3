@@ -3,5 +3,11 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+
+    /* Import Handling */
+    "paths": {
+      // Import alias to the root directory of the project
+      "@/*": ["./*"],
+    }
   },
 }

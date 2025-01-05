@@ -1,5 +1,6 @@
-/* stylelint-disable function-no-unknown, declaration-property-value-no-unknown */
-@import url('./_reset.css');
+@layer reset, base, components;
+
+@import url('./_reset.css') layer(reset);
 @import url('./_lib.css');
 
 :root {
@@ -22,13 +23,13 @@
   /* stylelint-enable */
 }
 
-a {
-  @apply decoration-none hover:decoration-underline;
-  color: theme('colors.violet.500');
+html,
+body {
+  @apply bg-surface-light-100 dark:bg-surface-dark-950 text-surface-light-950 dark:text-surface-dark-50;
 }
 
-.icon-link {
-  @apply inline-flex flex-row flex-nowrap flex-justify-start flex-items-center gap-1;
+:where(a) {
+  @apply inline-flex flex-row flex-nowrap justify-start items-center gap-1;
 
   & > .icon {
     flex: 0 0 auto;
@@ -37,4 +38,8 @@ a {
   & > :not(.icon) {
     flex: 1 0 auto;
   }
+}
+
+a {
+  @apply no-underline hover:underline text-primary-700 dark:text-primary-500;
 }
