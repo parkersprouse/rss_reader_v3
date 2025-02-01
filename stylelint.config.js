@@ -30,6 +30,24 @@ export default {
      * Base Stylelint rule customization:
      * https://stylelint.io/user-guide/rules
      */
+    'at-rule-no-deprecated': [
+      true,
+      {
+        ignoreAtRules: ['apply'],
+      },
+    ],
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          'apply',
+          'responsive',
+          'screen',
+          'tailwind',
+          'variants',
+        ],
+      },
+    ],
     'declaration-block-no-duplicate-properties': [
       true,
       {
