@@ -1,0 +1,41 @@
+name: Run Lint Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      # STEP 1 #
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      # STEP 2 #
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # STEP 3 #
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: true
+          version: 9
+
+      # STEP 4 #
+      - name: Lint CSS
+        run: pnpm run lint:css:ci
+
+      # STEP 5 #
+      - name: Lint JS
+        uses: pnpm run lint:js

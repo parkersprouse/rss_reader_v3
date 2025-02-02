@@ -1,0 +1,14 @@
+[phases.setup]
+cmds = ['...', 'npm install -g corepack', 'corepack enable', 'corepack prepare pnpm@9 --activate']
+
+[phases.install]
+dependsOn = ['setup']
+cmds = ['...'] # `pnpm install` is automatically run in this step of the process
+
+[phases.build]
+dependsOn = ['install']
+cmds = ['...', 'pnpm run build']
+
+[start]
+dependsOn = ['build']
+cmd = 'node .output/server/index.mjs'

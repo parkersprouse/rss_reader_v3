@@ -15,6 +15,9 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/styles/main.css'],
   compatibilityDate: '2024-11-01',
+  nitro: {
+    preset: 'node-server',
+  },
   typescript: {
     builder: 'vite',
     typeCheck: true,
