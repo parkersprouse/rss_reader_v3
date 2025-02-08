@@ -1,4 +1,6 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+/**
+ * Nuxt Configuration : https://nuxt.com/docs/api/configuration/nuxt-config
+ */
 
 /* eslint-disable sort-keys -- Nuxt has a specifically desired key order */
 export default defineNuxtConfig({
@@ -8,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/stylelint-module',
     '@pinia/nuxt',
     '@prisma/nuxt',
+    '@sidebase/nuxt-auth',
     '@vueuse/nuxt',
     'nuxt-security',
   ],
@@ -38,6 +41,19 @@ export default defineNuxtConfig({
           '@/*': ['./*'],
         },
       },
+    },
+  },
+  auth: {
+    isEnabled: true,
+    disableServerSideAuth: false,
+    originEnvKey: 'AUTH_ORIGIN',
+    baseURL: '/api/auth',
+    provider: {
+      type: 'local',
+    },
+    sessionRefresh: {
+      enablePeriodically: true,
+      enableOnWindowFocus: true,
     },
   },
   eslint: {

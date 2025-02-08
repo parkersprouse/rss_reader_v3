@@ -30,7 +30,6 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: true
-          version: 9
 
       # STEP 4 #
       - name: Lint CSS
@@ -38,4 +37,4 @@ jobs:
 
       # STEP 5 #
       - name: Lint JS
-        uses: pnpm run lint:js
+        run: pnpm run lint:js
