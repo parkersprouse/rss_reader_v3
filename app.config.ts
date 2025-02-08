@@ -1,4 +1,4 @@
-/* eslint-disable @stylistic/max-len -- Some of these class lists are gonna get long */
+/* eslint-disable @stylistic/max-len -- n/a */
 export default defineAppConfig({
   icon: {
     class: 'icon',
@@ -6,12 +6,24 @@ export default defineAppConfig({
   },
   ui: {
     gray: 'zinc',
-    primary: 'sky',
+    primary: 'blue', // 'black',
 
-    button: {
-      variant: {
-        plain: 'text-gray-700 hover:text-gray-900 hover:bg-gray-200 dark:text-gray-200 dark:hover:text-white dark:hover:bg-gray-800',
+    notification: {
+      default: {
+        closeButton: {
+          // color: 'gray',
+          icon: 'ph:x-light',
+          padded: true,
+          size: 'xs',
+          square: true,
+          // variant: 'ghost',
+        },
+        timeout: 3000,
       },
+    },
+    notifications: {
+      // Show toasts at the top right of the screen
+      position: 'top-0 bottom-[unset]',
     },
   },
 });

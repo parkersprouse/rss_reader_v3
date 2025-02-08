@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class='h-full'>
     <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <UNotifications />
   </div>
 </template>

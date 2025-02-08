@@ -2,8 +2,9 @@
   <ClientOnly>
     <UButton
       id='theme-toggle-btn'
-      :icon='is_dark ? "i-ph-sun-fill" : "i-ph-moon-fill"'
-      variant='plain'
+      color='gray'
+      variant='ghost'
+      :icon='is_dark ? "ph:sun-fill" : "ph:moon-fill"'
       aria-label='Toggle Theme'
       @click='is_dark = !is_dark'
     />

@@ -10,6 +10,7 @@ export default {
     'node_modules/**/*',
     '.nuxt/**/*',
     '.output/**/*',
+    'dist/**/*',
   ],
   lintDirtyOnly: false,
   lintOnStart: false,

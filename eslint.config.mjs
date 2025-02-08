@@ -1,6 +1,4 @@
 // @ts-check
-import path from 'node:path';
-
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import n from 'eslint-plugin-n';
 import globals from 'globals';
@@ -18,6 +16,7 @@ const server_files = [
   '*.config.*',
   ...[
     'bin',
+    'modules',
     'server',
   ].flatMap((dir) => exts.map((ext) => `${dir}/**/*${ext}`)),
 ];
@@ -44,6 +43,9 @@ export default withNuxt()
     {
       ignores: [
         'node_modules/**/*',
+        '.nuxt/**/*',
+        '.output/**/*',
+        'dist/**/*',
         'TEMPLATE.vue',
       ],
     },
@@ -72,7 +74,7 @@ export default withNuxt()
           'eslint-import-resolver-custom-alias': {
             alias: {
               // Import alias to the root directory of the project
-              '@': path.join(__dirname, '.'),
+              '@': './',
             },
             extensions: exts,
           },
@@ -80,6 +82,16 @@ export default withNuxt()
       },
     },
   ])
+  .insertBefore('nuxt/javascript', {
+    /**
+     * I'm unsure where the `node / n` plugin gets loaded, but this rule
+     * has trouble finding many of the existing server-side deps, so it'll
+     * be easier to just disable it for now.
+     */
+    rules: {
+      'n/no-missing-import': 'off',
+    },
+  })
   .override('nuxt/javascript', {
     /**
      * ------------------------------------------------------------------------------
@@ -599,7 +611,14 @@ export default withNuxt()
       'import/no-named-as-default': 'error',
       'import/no-named-as-default-member': 'error',
       'import/no-namespace': 'error',
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': [
+        'error',
+        {
+          ignore: [
+            '@nuxt/kit',
+          ],
+        },
+      ],
       'import/no-webpack-loader-syntax': 'error',
       'import/order': [
         'error',
@@ -805,7 +824,6 @@ export default withNuxt()
           allowModules: ['tailwindcss'],
         },
       ],
-      'n/no-missing-import': 'off',
       'n/no-path-concat': 'error',
       'n/no-process-exit': 'off',
       'n/prefer-global/console': ['error', 'always'],
@@ -829,7 +847,6 @@ export default withNuxt()
       'n/handle-callback-err': 'off',
       'n/no-callback-literal': 'off',
       'n/no-extraneous-import': 'off',
-      'n/no-missing-import': 'off',
       'n/no-path-concat': 'off',
       'n/no-process-exit': 'off',
       'n/prefer-global/console': 'off',

@@ -28,6 +28,11 @@ body {
   @apply bg-surface-light-100 dark:bg-surface-dark-950 text-surface-light-950 dark:text-surface-dark-50;
 }
 
+main,
+#__nuxt {
+  @apply h-full;
+}
+
 :where(a) {
   @apply inline-flex flex-row flex-nowrap justify-start items-center gap-1;
 
@@ -42,4 +47,12 @@ body {
 
 a {
   @apply no-underline hover:underline text-primary-700 dark:text-primary-500;
+
+  &[type='button'] {
+    @apply no-underline hover:no-underline;
+  }
+}
+
+.text-muted {
+  @apply text-surface-light-600 dark:text-surface-dark-400;
 }

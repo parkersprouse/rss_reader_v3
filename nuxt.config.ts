@@ -7,11 +7,17 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/stylelint-module',
     '@pinia/nuxt',
+    '@prisma/nuxt',
     '@vueuse/nuxt',
     'nuxt-security',
   ],
   devtools: {
     enabled: true,
+  },
+  app: {
+    head: {
+      title: 'RSS Reader',
+    },
   },
   css: ['~/assets/styles/main.css'],
   compatibilityDate: '2024-11-01',
@@ -21,6 +27,18 @@ export default defineNuxtConfig({
   typescript: {
     builder: 'vite',
     typeCheck: true,
+    tsConfig: {
+      compilerOptions: {
+        allowImportingTsExtensions: true,
+        // emitDecoratorMetadata: true,
+        esModuleInterop: true,
+        // experimentalDecorators: true,
+        paths: {
+          // Import alias to the root directory of the project
+          '@/*': ['./*'],
+        },
+      },
+    },
   },
   eslint: {
     config: {
