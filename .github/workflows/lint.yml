@@ -38,4 +38,4 @@ jobs:
 
       # STEP 5 #
       - name: Lint JS
-        uses: pnpm run lint:js
+        run: pnpm run lint:js

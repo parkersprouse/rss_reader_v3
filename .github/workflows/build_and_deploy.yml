@@ -1,0 +1,30 @@
+name: Build and Deploy
+
+env:
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEPLOY_TOKEN }}
+  SERVICE_NAME: ${{ secrets.RAILWAY_SERVICE_NAME }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # STEP 1 - CHECKOUT REPO
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      # STEP 2 - INSTALL RAILWAY CLI
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+
+      # STEP 3 - CONFIGURE AND DEPLOY APP
+      - name: Deploy App
+        run: |
+          railway up -s ${{ env.SERVICE_NAME }} -e production
