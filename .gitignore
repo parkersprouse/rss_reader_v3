@@ -24,6 +24,3 @@ logs
 .idea
 *.bak
 .stylelint*
-
-# Database
-prisma/migrations
