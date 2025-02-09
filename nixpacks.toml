@@ -7,7 +7,7 @@ cmds = ['...'] # `pnpm install` is automatically run in this step of the process
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['...', 'pnpm run build', 'pnpm run db migrate deploy']
+cmds = ['...', 'pnpm run db migrate deploy'] # `pnpm run build` is automatically run in this step of the process
 
 [start]
 dependsOn = ['build']
