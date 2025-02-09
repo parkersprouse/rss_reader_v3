@@ -13,7 +13,7 @@
   },
   "scripts": {
     "preinstall": "node ./bin/ensure_pnpm.js",
-    "postinstall": "nuxt prepare",
+    "predev": "nuxt prepare",
     "start": "pnpm run dev",
     "dev": "dotenvx run -- nuxt dev",
     "preview": "dotenvx run -- nuxt preview",
