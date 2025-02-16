@@ -1,0 +1,15 @@
+{
+  "name": "rss_reader_v3",
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "franken-ui": "^2.0.0-internal.45",
+    "postcss": "^8.5.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
